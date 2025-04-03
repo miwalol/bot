@@ -21,8 +21,11 @@ func main() {
 		log.Fatalf("Failed to start the bot: %v", err)
 	}
 
+	s.Identify.Intents = discordgo.IntentsGuildMessages
+
 	s.AddHandler(events.ReadyEvent)
 	s.AddHandler(events.GuildMemberAdd)
+	s.AddHandler(events.MessageCreate)
 
 	err = s.Open()
 	if err != nil {
