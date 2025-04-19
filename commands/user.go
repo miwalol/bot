@@ -54,6 +54,13 @@ func getBackgroundUrl(url *string) string {
 	return ""
 }
 
+func getString(s *string) string {
+	if s != nil {
+		return *s
+	}
+	return ""
+}
+
 func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 	id := strings.TrimSpace(m.Content[len("?user"):])
 	if len(id) < 1 {
@@ -74,14 +81,14 @@ func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 	embed := &discordgo.MessageEmbed{
 		Author: &discordgo.MessageEmbedAuthor{
 			Name:    formatUsername(user.Username, user.DisplayName),
-			IconURL: *user.AvatarUrl,
+			IconURL: getString(user.AvatarUrl),
 			URL:     fmt.Sprintf("https://miwa.lol/%s", user.Username),
 		},
 		Title:       "User Profile",
 		Description: getBio(user.Bio, user.TypewriterTexts),
 		Color:       int(color),
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
-			URL: *user.AvatarUrl,
+			URL: getString(user.AvatarUrl),
 		},
 		Image: &discordgo.MessageEmbedImage{
 			URL: getBackgroundUrl(user.BackgroundUrl),

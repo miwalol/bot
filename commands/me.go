@@ -21,14 +21,14 @@ func Me(s *discordgo.Session, m *discordgo.MessageCreate) {
 	embed := &discordgo.MessageEmbed{
 		Author: &discordgo.MessageEmbedAuthor{
 			Name:    formatUsername(user.Username, user.DisplayName),
-			IconURL: *user.AvatarUrl,
+			IconURL: getString(user.AvatarUrl),
 			URL:     fmt.Sprintf("https://miwa.lol/%s", user.Username),
 		},
 		Title:       "User Profile",
 		Description: getBio(user.Bio, user.TypewriterTexts),
 		Color:       int(color),
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
-			URL: *user.AvatarUrl,
+			URL: getString(user.AvatarUrl),
 		},
 		Image: &discordgo.MessageEmbedImage{
 			URL: getBackgroundUrl(user.BackgroundUrl),
