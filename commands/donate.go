@@ -15,8 +15,5 @@ func Donate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		),
 	}
 
-	s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
-		Embed:     embed,
-		Reference: m.Reference(),
-	})
+	_, _ = s.ChannelMessageSendEmbedReply(m.ChannelID, embed, m.Reference())
 }
