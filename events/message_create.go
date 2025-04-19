@@ -15,7 +15,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.ChannelID == utils.ProfilesChannelId {
-		r := regexp.MustCompile("https://miwa\\.lol/[a-zA-Z0-9_\\-$@]{1,20}")
+		r := regexp.MustCompile("https://miwa\\.lol/[a-zA-Z0-9_\\-$@.]{1,20}")
 		match := r.FindStringSubmatch(m.Content)
 
 		// If the Regex is not matching
@@ -44,6 +44,13 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			// Ignore errors
 			return
 		}
+		return
+	}
+
+	// If the message is a mention of the bot
+	if regexp.MustCompile(fmt.Sprintf("<@!?%s>", s.State.User.ID)).MatchString(m.Content) {
+		_, _ = s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("👋 **Hi %s!** Type `?help` to see what I can do.", m.Author.Mention()))
+		return
 	}
 
 	if m.Content == "?donate" {
