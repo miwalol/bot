@@ -2,7 +2,7 @@ module miwa-bot
 
 go 1.24
 
-replace github.com/bwmarrin/discordgo => github.com/justyuuto/discordgo v0.0.0-20250419185446-f5cb48fdd62e
+replace github.com/bwmarrin/discordgo => github.com/justyuuto/discordgo v0.0.0-20250419224114-3cf59edab46b
 
 require (
 	github.com/bwmarrin/discordgo v0.28.1

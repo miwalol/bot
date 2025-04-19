@@ -95,7 +95,6 @@ func StartServer(s *discordgo.Session) {
 			return
 		}
 
-		activity := presence.Activities[0]
 		if len(presence.Activities) == 0 {
 			c.JSON(http.StatusOK, gin.H{
 				"status":   presence.Status,
@@ -104,6 +103,7 @@ func StartServer(s *discordgo.Session) {
 			return
 		}
 
+		activity := presence.Activities[0]
 		c.JSON(http.StatusOK, gin.H{
 			"status": presence.Status,
 			"activity": gin.H{
@@ -113,6 +113,7 @@ func StartServer(s *discordgo.Session) {
 				"state":          activity.State,
 				"emoji":          getStatusEmoji(&activity.Emoji),
 				"application_id": activity.ApplicationID,
+				"sync_id":        activity.SyncID,
 				"assets": gin.H{
 					"large_image": activity.Assets.LargeImageID,
 					"large_text":  activity.Assets.LargeText,
