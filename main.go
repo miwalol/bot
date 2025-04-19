@@ -17,6 +17,10 @@ func main() {
 		log.Fatalf("Failed to start the bot: %v", err)
 	}
 
+	s.Identify.Presence.Game = discordgo.Activity{
+		Type: discordgo.ActivityTypeWatching,
+		Name: "miwa.lol | ?help",
+	}
 	s.Identify.Intents = discordgo.IntentsGuildMessages |
 		discordgo.IntentsGuildPresences |
 		discordgo.IntentsGuildMembers |
