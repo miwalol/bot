@@ -18,7 +18,7 @@ func DbConnect() *gorm.DB {
 	host := url.Host
 	user := url.User.Username()
 	password, passwordSet := url.User.Password()
-	database := url.Path
+	database := url.Path[1:]
 
 	if host == "" || user == "" || password == "" || !passwordSet || database == "" {
 		log.Fatal("Cannot connect to database, some environment variables are not set")

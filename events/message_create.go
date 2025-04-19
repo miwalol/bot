@@ -6,6 +6,7 @@ import (
 	"miwa-bot/commands"
 	"miwa-bot/utils"
 	"regexp"
+	"strings"
 )
 
 func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -57,5 +58,9 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.Donate(s, m)
 	} else if m.Content == "?help" {
 		commands.Help(s, m)
+	} else if m.Content == "?me" {
+		commands.Me(s, m)
+	} else if strings.HasPrefix(m.Content, "?user") {
+		commands.User(s, m)
 	}
 }
