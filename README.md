@@ -15,6 +15,7 @@ The bot is used to:
 - `models/`: Contains the database models.
 - `utils/`: Contains utility functions, such as the database connection.
 - `main.go`: Self-explanatory, the main file of the bot.
+- `server.go`: A local server used by the Miwa API and website, to get users and presences. 
 
 ## License
 
