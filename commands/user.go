@@ -16,12 +16,12 @@ func formatUsername(username string, displayName *string) string {
 	return username
 }
 
-func getBio(bio *string, typewriterTexts []string) string {
+func getBio(bio *string, typewriterTexts []string, typewriterEnabled bool) string {
+	if len(typewriterTexts) > 0 && typewriterEnabled {
+		return typewriterTexts[0]
+	}
 	if bio != nil {
 		return *bio
-	}
-	if len(typewriterTexts) > 0 {
-		return typewriterTexts[0]
 	}
 	return "No description set."
 }
@@ -85,7 +85,7 @@ func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 			URL:     fmt.Sprintf("https://miwa.lol/%s", user.Username),
 		},
 		Title:       "User Profile",
-		Description: getBio(user.Bio, user.TypewriterTexts),
+		Description: getBio(user.Bio, user.TypewriterTexts, user.TypewriterEnabled),
 		Color:       int(color),
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: getString(user.AvatarUrl),
