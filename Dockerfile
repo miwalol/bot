@@ -15,4 +15,6 @@ RUN apt update && apt install -y ca-certificates
 
 COPY --from=builder /build/bot /app/bot
 
+ENV GIN_MODE=release
+
 CMD ["/app/bot"]
