@@ -25,7 +25,7 @@ func Me(s *discordgo.Session, m *discordgo.MessageCreate) {
 			URL:     fmt.Sprintf("https://miwa.lol/%s", user.Username),
 		},
 		Title:       "User Profile",
-		Description: getBio(user.Bio, user.TypewriterTexts),
+		Description: getBio(user.Bio, user.TypewriterTexts, user.TypewriterEnabled),
 		Color:       int(color),
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: getString(user.AvatarUrl),
