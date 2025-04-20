@@ -3,6 +3,7 @@ package models
 import "time"
 
 type Users struct {
+	Id                string    `gorm:"column:id;primaryKey"`
 	Username          string    `gorm:"column:handle"`
 	Alias             string    `gorm:"column:alias"`
 	DisplayName       *string   `gorm:"column:displayName"`
