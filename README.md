@@ -27,8 +27,9 @@ The bot is used to:
 The bot has the following commands:
 - `help`: Shows the help message and the list of commands.
 - `user <username>`: Shows the user information for the given username.
-- `me`: Shows the user information for the user who sent the command. Only works if the user links their Discord account to their Miwa account.
+- `me`: Shows the user information for the user who sent the command. *Only works if the user links their Discord account to their Miwa account.*
 - `donate`: Shows ways to support Miwa.lol.
+- `tag <tag>`: Sends a predefined message to the user. *Only for the Miwa staff.*
 
 ## License
 

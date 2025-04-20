@@ -62,5 +62,16 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.Me(s, m)
 	} else if strings.HasPrefix(m.Content, "?user") {
 		commands.User(s, m)
+	} else if strings.HasPrefix(m.Content, "?tag") {
+		// Check if the user can manage the server
+		perms, err := s.State.UserChannelPermissions(m.Author.ID, m.ChannelID)
+		if err != nil {
+			return
+		}
+		if perms&discordgo.PermissionManageServer == 0 {
+			return
+		}
+
+		commands.Tag(s, m)
 	}
 }
