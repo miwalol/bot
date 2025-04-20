@@ -50,7 +50,7 @@ func Tag(s *discordgo.Session, m *discordgo.MessageCreate) {
 	_ = s.ChannelMessageDelete(m.ChannelID, m.ID)
 	_, _ = s.ChannelMessageSend(m.ChannelID, tag)
 
-	canCloseThread := tagMsg == "fixed" || tagMsg == "accepted"
+	canCloseThread := tagMsg == "fixed" || tagMsg == "accepted" || tagMsg == "resolved" || tagMsg == "fix"
 	if canCloseThread {
 		locked := true
 		_, _ = s.ChannelEditComplex(m.ChannelID, &discordgo.ChannelEdit{
