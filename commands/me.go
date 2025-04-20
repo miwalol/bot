@@ -13,10 +13,26 @@ func Me(s *discordgo.Session, m *discordgo.MessageCreate) {
 	var user models.Users
 	err := db.Model(models.Users{}).Where("\"discordId\" = ?", m.Author.ID).First(&user).Error
 	if err != nil {
-		_, _ = s.ChannelMessageSend(m.ChannelID, "❌ **You need to link your Discord account to your Miwa account to use this command.**")
+		_, _ = s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
+			Content:   "❌ **You need to link your Discord account to your Miwa account to use this command.**",
+			Reference: m.Reference(),
+			Components: []discordgo.MessageComponent{
+				discordgo.ActionsRow{
+					Components: []discordgo.MessageComponent{
+						discordgo.Button{
+							Label: "Link your Discord account",
+							Style: discordgo.LinkButton,
+							URL:   "https://help.miwa.lol/how-to/link-discord",
+						},
+					},
+				},
+			},
+		})
 		return
 	}
 
+	var views int64
+	db.Model(models.PageViews{}).Where("\"userId\" = ?", user.Id).Count(&views)
 	color, _ := strconv.ParseUint((*user.AccentColor)[1:], 16, 16)
 	embed := &discordgo.MessageEmbed{
 		Author: &discordgo.MessageEmbedAuthor{
@@ -50,6 +66,9 @@ func Me(s *discordgo.Session, m *discordgo.MessageCreate) {
 				Value:  getAssetsField(user),
 				Inline: false,
 			},
+		},
+		Footer: &discordgo.MessageEmbedFooter{
+			Text: fmt.Sprintf("Views: %v", views),
 		},
 	}
 

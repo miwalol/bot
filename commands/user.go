@@ -77,6 +77,8 @@ func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	var views int64
+	db.Model(models.PageViews{}).Where("\"userId\" = ?", user.Id).Count(&views)
 	color, _ := strconv.ParseUint((*user.AccentColor)[1:], 16, 16)
 	embed := &discordgo.MessageEmbed{
 		Author: &discordgo.MessageEmbedAuthor{
@@ -110,6 +112,9 @@ func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 				Value:  getAssetsField(user),
 				Inline: false,
 			},
+		},
+		Footer: &discordgo.MessageEmbedFooter{
+			Text: fmt.Sprintf("Views: %v", views),
 		},
 	}
 
