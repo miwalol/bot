@@ -43,5 +43,19 @@ func Help(s *discordgo.Session, m *discordgo.MessageCreate) {
 		},
 	}
 
-	_, _ = s.ChannelMessageSendEmbedReply(m.ChannelID, embed, m.Reference())
+	_, _ = s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
+		Embed:     embed,
+		Reference: m.Reference(),
+		Components: []discordgo.MessageComponent{
+			discordgo.ActionsRow{
+				Components: []discordgo.MessageComponent{
+					discordgo.Button{
+						Label: "Miwa Help",
+						Style: discordgo.LinkButton,
+						URL:   "https://help.miwa.lol",
+					},
+				},
+			},
+		},
+	})
 }
