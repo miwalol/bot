@@ -27,6 +27,10 @@ func Help(s *discordgo.Session, m *discordgo.MessageCreate) {
 			Description: "Get your profile",
 		},
 		{
+			Name:        "stats",
+			Description: "Miwa.lol stats",
+		},
+		{
 			Name:        "donate",
 			Description: "Ways to support us by donating",
 		},

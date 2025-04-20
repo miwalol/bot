@@ -60,6 +60,8 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.Help(s, m)
 	} else if m.Content == "?me" {
 		commands.Me(s, m)
+	} else if m.Content == "?stats" {
+		commands.Stats(s, m)
 	} else if strings.HasPrefix(m.Content, "?user") {
 		commands.User(s, m)
 	} else if strings.HasPrefix(m.Content, "?tag") {
