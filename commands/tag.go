@@ -13,6 +13,10 @@ var messages = map[string]string{
 	"denied": "❌ **This suggestion has been denied.** After reviewing the suggestion, we have decided that we will not add this feature to Miwa.lol.",
 	// Suggestion accepted message
 	"accepted": "✅ **This suggestion has been accepted!** We will add this feature to Miwa.lol in the future.",
+	// Suggestion pending message. When we are not sure if we'll add the feature or not
+	"pending": "⏳ **This suggestion is pending.** We will review this suggestion and get back to you as soon as possible.",
+	// Suggestion worked on message.
+	"working": "🔨 **We are working on this suggestion!** You'll see it in the next update.",
 }
 var aliases = map[string][]string{
 	// "original": {"alias1", "alias2"},
@@ -50,7 +54,7 @@ func Tag(s *discordgo.Session, m *discordgo.MessageCreate) {
 	_ = s.ChannelMessageDelete(m.ChannelID, m.ID)
 	_, _ = s.ChannelMessageSend(m.ChannelID, tag)
 
-	canCloseThread := tagMsg == "fixed" || tagMsg == "accepted" || tagMsg == "resolved" || tagMsg == "fix"
+	canCloseThread := tagMsg == "fixed" || tagMsg == "resolved" || tagMsg == "fix"
 	if canCloseThread {
 		locked := true
 		_, _ = s.ChannelEditComplex(m.ChannelID, &discordgo.ChannelEdit{
