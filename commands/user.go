@@ -70,7 +70,7 @@ func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	db := utils.DbConnect()
 	var user models.Users
-	err := db.Model(models.Users{}).Where("handle = ?", id).Or("alias = ?", id).First(&user).Error
+	err := db.Model(models.Users{}).Where("handle ILIKE ?", id).Or("alias ILIKE ?", id).First(&user).Error
 
 	if err != nil {
 		_, _ = s.ChannelMessageSend(m.ChannelID, "❌ **User not found.** Please check the username and try again.")
