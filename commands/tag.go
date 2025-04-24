@@ -58,7 +58,10 @@ func Tag(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if canCloseThread {
 		locked := true
 		_, _ = s.ChannelEditComplex(m.ChannelID, &discordgo.ChannelEdit{
+			// Lock the thread to prevent further messages
 			Locked: &locked,
+			// Also archive the thread to put it in the "Older posts" section
+			Archived: &locked,
 		})
 	}
 }
