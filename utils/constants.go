@@ -14,3 +14,6 @@ const RulesChannelId = "1247646549131919390"
 const AboutUsChannelId = "1282443916943167508"
 const ProfilesChannelId = "1247648725023719525"
 const BoostsChannelId = "1247646610729472053"
+
+const EmojiCheck = "<:check:1316531236667265126>"
+const EmojiNo = "<:no:1316531268166484058>"

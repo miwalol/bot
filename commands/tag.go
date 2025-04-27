@@ -2,17 +2,18 @@ package commands
 
 import (
 	"github.com/bwmarrin/discordgo"
+	"miwa-bot/utils"
 	"strings"
 )
 
 var messages = map[string]string{
 	// "trigger": "response",
 	// Bug fixed message
-	"fixed": "✅ **This bug has been fixed!** Thank you for your report. If you find any other bugs, please report them in the <#1254772076527484978> channel.",
+	"fixed": utils.EmojiCheck + " **This bug has been fixed!** Thank you for your report. If you find any other bugs, please report them in the <#1254772076527484978> channel.",
 	// Suggestion denied message
-	"denied": "❌ **This suggestion has been denied.** After reviewing the suggestion, we have decided that we will not add this feature to Miwa.lol.",
+	"denied": utils.EmojiNo + " **This suggestion has been denied.** After reviewing the suggestion, we have decided that we will not add this feature to Miwa.lol.",
 	// Suggestion accepted message
-	"accepted": "✅ **This suggestion has been accepted!** We will add this feature to Miwa.lol in the future.",
+	"accepted": utils.EmojiCheck + "**This suggestion has been accepted!** We will add this feature to Miwa.lol in the future.",
 	// Suggestion pending message. When we are not sure if we'll add the feature or not
 	"pending": "⏳ **This suggestion is pending.** We will review this suggestion and get back to you as soon as possible.",
 	// Suggestion worked on message.
@@ -26,7 +27,7 @@ var aliases = map[string][]string{
 func Tag(s *discordgo.Session, m *discordgo.MessageCreate) {
 	tagMsg := strings.TrimSpace(m.Content[len("?tag"):])
 	if tagMsg == "" {
-		_, _ = s.ChannelMessageSendReply(m.ChannelID, "❌ **Please provide a tag to send.**", m.Reference())
+		_, _ = s.ChannelMessageSendReply(m.ChannelID, "❗ **Please provide a tag to send.**", m.Reference())
 		return
 	}
 
@@ -46,7 +47,7 @@ func Tag(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if tag == "" {
-			_, _ = s.ChannelMessageSendReply(m.ChannelID, "❌ **Tag not found.**", m.Reference())
+			_, _ = s.ChannelMessageSendReply(m.ChannelID, "❗ **Tag not found.**", m.Reference())
 			return
 		}
 	}

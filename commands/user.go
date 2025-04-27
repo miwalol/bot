@@ -64,7 +64,7 @@ func getString(s *string) string {
 func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 	id := strings.TrimSpace(m.Content[len("?user"):])
 	if len(id) < 1 {
-		_, _ = s.ChannelMessageSendReply(m.ChannelID, "❌ **Please provide a username or an alias.**", m.Reference())
+		_, _ = s.ChannelMessageSendReply(m.ChannelID, "❗ **Please provide a username or an alias.**", m.Reference())
 		return
 	}
 
@@ -73,7 +73,7 @@ func User(s *discordgo.Session, m *discordgo.MessageCreate) {
 	err := db.Model(models.Users{}).Where("handle ILIKE ?", id).Or("alias ILIKE ?", id).First(&user).Error
 
 	if err != nil {
-		_, _ = s.ChannelMessageSend(m.ChannelID, "❌ **User not found.** Please check the username and try again.")
+		_, _ = s.ChannelMessageSend(m.ChannelID, "❗ **User not found.** Please check the username and try again.")
 		return
 	}
 
