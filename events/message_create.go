@@ -22,7 +22,12 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		// If the Regex is not matching
 		if len(match) < 1 {
 			_ = s.ChannelMessageDelete(m.ChannelID, m.ID)
+			return
 		}
+
+		// React to the message with up and down emojis
+		_ = s.MessageReactionAdd(m.ChannelID, m.ID, "up:1365786836919779358")
+		_ = s.MessageReactionAdd(m.ChannelID, m.ID, "down:1365787004440154133")
 	} else if m.ChannelID == utils.BoostsChannelId {
 		// Check if the message is a server boost message
 		if m.Type != discordgo.MessageTypeUserPremiumGuildSubscription &&
