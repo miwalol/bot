@@ -2,13 +2,14 @@ package commands
 
 import (
 	"github.com/bwmarrin/discordgo"
+	"golang.org/x/text/message"
 	"miwa-bot/models"
 	"miwa-bot/utils"
-	"strconv"
 )
 
 func Stats(s *discordgo.Session, m *discordgo.MessageCreate) {
 	db := utils.DbConnect()
+	p := message.NewPrinter(message.MatchLanguage("en"))
 	var usersCount int64
 	var premiumUsers int64
 	var pageViews int64
@@ -20,16 +21,19 @@ func Stats(s *discordgo.Session, m *discordgo.MessageCreate) {
 		URL:   "https://miwa.lol/",
 		Fields: []*discordgo.MessageEmbedField{
 			{
-				Name:  "Users",
-				Value: strconv.FormatInt(usersCount, 10),
+				Name:   "Users",
+				Value:  p.Sprintf("%d", usersCount),
+				Inline: true,
 			},
 			{
-				Name:  "Page Views",
-				Value: strconv.FormatInt(pageViews, 10),
+				Name:   "Page Views",
+				Value:  p.Sprintf("%d", pageViews),
+				Inline: true,
 			},
 			{
-				Name:  "Premium Users",
-				Value: strconv.FormatInt(premiumUsers, 10),
+				Name:   "Premium Users",
+				Value:  p.Sprintf("%d", premiumUsers),
+				Inline: true,
 			},
 		},
 	}
