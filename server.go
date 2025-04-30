@@ -73,6 +73,13 @@ func getStatusEmoji(emoji *discordgo.Emoji) *map[string]any {
 	}
 }
 
+func getNilOrString(s string) *string {
+	if s == "" {
+		return nil
+	}
+	return &s
+}
+
 func StartServer(s *discordgo.Session) {
 	r := gin.Default()
 
@@ -127,11 +134,11 @@ func StartServer(s *discordgo.Session) {
 		c.JSON(http.StatusOK, gin.H{
 			"id":          member.User.ID,
 			"username":    member.User.Username,
-			"global_name": member.User.GlobalName,
-			"avatar":      member.User.Avatar,
+			"global_name": getNilOrString(member.User.GlobalName),
+			"avatar":      getNilOrString(member.User.Avatar),
 			// https://support.discord.com/hc/en-us/articles/13410113109911-Avatar-Decorations
 			"avatar_decoration": decoration,
-			"banner":            member.Banner,
+			"banner":            getNilOrString(member.Banner),
 			"flags":             member.User.PublicFlags,
 			// https://support.discord.com/hc/en-us/articles/23187611406999-Guilds-FAQ
 			"clan":        getClan(member.User.Clan),
