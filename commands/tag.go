@@ -17,11 +17,13 @@ var messages = map[string]string{
 	// Suggestion pending message. When we are not sure if we'll add the feature or not
 	"pending": "⏳ **This suggestion is pending.** We will review this suggestion and get back to you as soon as possible.",
 	// Suggestion worked on message.
-	"working": "🔨 **We are working on this suggestion!** You'll see it in the next update.",
+	"working":        "🔨 **We are working on this suggestion!** You'll see it in the next update.",
+	"assets-sharing": "🔗 **Please use the correct channels for sharing assets:**\n- **Avatars:** <#1247650403449966682>\n- **Banners:** <#1247650754718597192>\n- **Backgrounds:** <#1247650315780751390>\n- **Audios:** <#1247650344205549589>\n- **Cursors:** <#1247650432323555428>",
 }
 var aliases = map[string][]string{
 	// "original": {"alias1", "alias2"},
-	"fixed": {"resolved", "fix"},
+	"fixed":          {"resolved", "fix"},
+	"assets-sharing": {"assets", "asset-sharing", "assets sharing", "assets-share"},
 }
 
 func Tag(s *discordgo.Session, m *discordgo.MessageCreate) {
