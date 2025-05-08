@@ -34,7 +34,7 @@ func GuildMemberAdd(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 	}
 
 	msg := fmt.Sprintf(
-		"**Welcome to the Miwa.lol Discord server, %s!** Please read the <#%s> & <#%s> channels and enjoy your stay! <@&%s>\nTo get the **MIWA** tag, please join https://discord.gg/NGQ7PSXr9U",
+		"**Welcome to the Miwa.lol Discord server, %s!** Please read the <#%s> & <#%s> channels and enjoy your stay! <@&%s>\nTo get the **MIWA** tag, please join <https://discord.gg/NGQ7PSXr9U>",
 		m.User.Mention(), utils.RulesChannelId, utils.AboutUsChannelId, utils.WelcomeTeamRoleId,
 	)
 	_, err := s.ChannelMessageSend(utils.ChatChannelId, msg)
