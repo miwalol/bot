@@ -180,12 +180,8 @@ func StartServer(s *discordgo.Session) {
 				"emoji":          getStatusEmoji(&activity.Emoji),
 				"application_id": activity.ApplicationID,
 				"sync_id":        activity.SyncID,
-				"assets": gin.H{
-					"large_image": activity.Assets.LargeImageID,
-					"large_text":  activity.Assets.LargeText,
-					"small_image": activity.Assets.SmallImageID,
-					"small_text":  activity.Assets.SmallText,
-				},
+				"large_image":    activity.Assets.LargeImageID,
+				"large_text":     activity.Assets.LargeText,
 			},
 		})
 	})
