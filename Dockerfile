@@ -1,4 +1,4 @@
-FROM golang:1.24 AS builder
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /build
 
@@ -7,11 +7,11 @@ COPY . .
 RUN go mod tidy && \
     go build -o bot .
 
-FROM debian:stable-slim
+FROM alpine:latest
 
 WORKDIR /app
 
-RUN apt update && apt install -y ca-certificates
+RUN apk update && apk add --no-cache ca-certificates
 
 COPY --from=builder /build/bot /app/bot
 
